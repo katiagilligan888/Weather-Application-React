@@ -11,16 +11,10 @@ class App extends Component {
         longitude: null, 
         location: null, 
         today: {
-          temp: null, 
-          forecast: null, 
-        },
-        tomorrow: {
-          temp: null,
-          forecast: null
-        }, 
-        day_after_tomorrow: {
-          temp: null, 
-          forecast: null
+          tempLow: null, 
+          tempHigh: null, 
+          summary: null, 
+          icon: null
         }
     }
   }
@@ -57,6 +51,20 @@ class App extends Component {
     })
     }
 
+    if(this.state.today.summary === null){
+      axios.get(`https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/2c1796047341253aa42573d20f77f040/${this.state.latitude},${this.state.longitude}`).then(response => {
+      this.setState({
+        today: {
+          tempLow: Math.floor(response.data.daily.data[0].apparentTemperatureLow), 
+          tempHigh: Math.floor(response.data.daily.data[0].apparentTemperatureHigh), 
+          icon: response.data.daily.data[0].icon, 
+          summary: response.data.hourly.summary
+        }
+      })
+      console.log(response.data)
+    })
+    
+  }
 
     
     
@@ -66,7 +74,16 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <div className = "weather-info">
+          <p>{this.state.location}</p>
+          <p>Time</p>
+          <p>High: {this.state.today.tempHigh} F</p>
+          <p>Low: {this.state.today.tempLow} F</p>
+        </div>
+        <div className = "summary">
 
+          <p> {this.state.today.summary} </p>
+        </div>
       </div>
     );
   }
