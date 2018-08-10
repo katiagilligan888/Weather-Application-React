@@ -1,1 +1,48 @@
+body {
+  color: hsl(240, 33%, 92%); 
+  padding: 0; 
+  font-family: 'Nunito', sans-serif;
+}
+
+.App {
+  background-color: #66667c; 
+  height: 99vh; 
+  width: 100%; 
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+}
+
+
+.weather-card {
+  display: flex; 
+  justify-content: space-around;  
+  align-items: center; 
+  margin: 0 auto; 
+  width: 50%; 
+  padding: 20px; 
+  border-radius: 20px; 
+}
+
+.weather-info {
+  display: flex; 
+  flex-direction: column; 
+  justify-content: space-around; 
+}
+
+.time {
+  font-weight: bold; 
+  font-size: 25px; 
+}
+
+
+.high-temp {
+  font-size: 70px; 
+}
+
+.low-temp {
+  font-size: 20px; 
+  padding-left: 20%;
+}
+
 
