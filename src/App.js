@@ -10,6 +10,7 @@ class App extends Component {
         latitude: null, 
         longitude: null, 
         location: null, 
+        time: null,
         today: {
           tempLow: null, 
           tempHigh: null, 
@@ -40,6 +41,7 @@ class App extends Component {
 
   componentDidMount(){
       this.getGeoLocation();
+      this.displayTime(); 
       
   }
 
@@ -64,11 +66,23 @@ class App extends Component {
       console.log(response.data)
     })
     
+  }  
   }
 
+  displayTime(){
+    let time; 
+    let newTime; 
+    setInterval(()=> {
+      time = new Date();
+      const options = {hour12: true, hour: "numeric", minute: "numeric", weekday: "long"};
+      newTime = time.toLocaleString('en-US', options); 
+      this.setState({
+        time: newTime
+      })
+    }, 3000)
     
-    
-  }
+}
+
 
   
   render() {
@@ -76,7 +90,7 @@ class App extends Component {
       <div className="App">
         <div className = "weather-info">
           <p>{this.state.location}</p>
-          <p>Time</p>
+          <p>{this.state.time}</p>
           <p>High: {this.state.today.tempHigh} F</p>
           <p>Low: {this.state.today.tempLow} F</p>
         </div>
