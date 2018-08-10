@@ -40,16 +40,19 @@ class App extends Component {
           longitude: long
         })
       })
-    }else {
-      this.setState({   // New York, New York default setting
-        latitude: -74.0060,
-        longitude: 40.7128
-      })
     }
+  }
+
+  getDefaultLocation(){
+    this.setState({
+      latitude: 40.7128, 
+      longitude: -74.0060,
+    })
   }
 
   componentDidMount(){
       this.getGeoLocation();
+      this.getDefaultLocation(); 
       this.displayTime(); 
       
   }
@@ -72,7 +75,7 @@ class App extends Component {
           tempLow: Math.floor(response.data.daily.data[0].apparentTemperatureLow), 
           tempHigh: Math.floor(response.data.daily.data[0].apparentTemperatureHigh), 
           icon: skyCon,
-          summary: response.data.hourly.summary
+          summary: response.data.currently.summary
         }
       })
       console.log(response.data)
@@ -196,7 +199,7 @@ class App extends Component {
           icon={this.state.today.icon}
           autoplay={true}
         />
-            <p> {this.state.today.summary} </p>
+            <p className = "summary-p"> {this.state.today.summary} </p>
           </div>
         </div>
       </div>
